@@ -20,6 +20,7 @@ const subEl = document.querySelector('.btn-primary');
 
 // Event handler
 subEl.addEventListener('click', (event) => {
+    validate(event);
     sentimentAnalysis(event);
 });
 

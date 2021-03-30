@@ -12,8 +12,10 @@ import { removeIcon } from './module/remove-icon'
 export async function sentimentAnalysis(event) {
     event.preventDefault();
 
-    const data = await fetchData('/fetchMeaningCloud', { txt: txtEl.value });
-    renderResult(data.score_tag);
+    if (txtEl.value) {
+        const data = await fetchData('/fetchMeaningCloud', { txt: txtEl.value });
+        renderResult(data.score_tag);
+    }
 }
 
 // Element
