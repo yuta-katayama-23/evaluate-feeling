@@ -17,6 +17,9 @@ This project is evaluate you feeling page.</br>
 - this project has validation, so you don't input any, input area will be red</br>入力時にはバリデーションチェックが走ります
 
 ## Testing
+### Jest
+- 単体テストをjestにて実装しています
+
 ### Cypress
 - i use Cypress for e2e testing<br>e2eテストにCypressを使用しています
 
@@ -28,3 +31,6 @@ This project is evaluate you feeling page.</br>
 
 ### server side
 - node.js
+
+### CI
+- GitHub ActionsによりCIを導入しています
