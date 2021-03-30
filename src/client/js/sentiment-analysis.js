@@ -3,32 +3,22 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 // js module
-import {
-    selectFeeling
-} from './module/select-feeling'
-import {
-    removeIcon
-} from './module/remove-icon'
-import {
-    removeText
-} from './module/remove-text'
+import { selectFeeling } from './module/select-feeling'
+import { removeIcon } from './module/remove-icon'
 
 /**
  * i am module and i judge feeling from input text
  */
-export function sentimentAnalysis(event) {
+export async function sentimentAnalysis(event) {
     event.preventDefault();
 
-    fetchData('/fetchMeaningCloud', {
-        txt: txtEl.value
-    }).then((data) => {
-        renderResult(data.score_tag);
-    });
+    const data = await fetchData('/fetchMeaningCloud', { txt: txtEl.value });
+    renderResult(data.score_tag);
 }
 
 // Element
 const txtEl = document.querySelector('#txt');
-const resultsEl = document.querySelector('#results');
+const cardBodyEl = document.querySelector('.card-body');
 
 const fetchData = async (url = '', data = {}) => {
     const response = await fetch(url, {
@@ -53,7 +43,9 @@ const fetchData = async (url = '', data = {}) => {
  * @param {string} scoreTag 
  */
 function renderResult(scoreTag) {
+    const resultsEl = document.createElement('div');
     resultsEl.innerHTML = `now your feeling is <strong>${selectFeeling(scoreTag)['value']}</strong>`;
+    cardBodyEl.append(resultsEl);
 
     removeIcon();
     let img = document.createElement('img');

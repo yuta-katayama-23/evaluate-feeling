@@ -1,16 +1,10 @@
 // js module
-import {
-    validate
-} from './js/validate';
-import {
-    sentimentAnalysis
-} from './js/sentiment-analysis';
+import { validate } from './js/validate';
+import { sentimentAnalysis } from './js/sentiment-analysis';
 
 // Sass
 import './styles/resets.scss';
 import './styles/base.scss';
-// import './styles/footer.scss'
-// import './styles/form.scss'
 import './styles/header.scss'
 
 // image
