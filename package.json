@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest src/*",
     "cy:op": "cypress open",
     "cy:run": "cypress run",
     "start": "node src/server/index.js",
