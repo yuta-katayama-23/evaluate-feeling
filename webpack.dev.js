@@ -21,47 +21,47 @@ module.exports = {
     },
     module: {
         rules: [{
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: "babel-loader"
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: "babel-loader"
+        },
+        {
+            test: /\.scss$/,
+            use: [{
+                loader: "style-loader",
             },
             {
-                test: /\.scss$/,
-                use: [{
-                        loader: "style-loader",
-                    },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            url: false,
-                            sourceMap: true,
-                            importLoaders: 2,
-                        },
-                    },
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            sourceMap: true,
-                            postcssOptions: {
-                                plugins: ["autoprefixer"],
-                            },
-                        },
-                    },
-                    {
-                        loader: "sass-loader",
-                        options: {
-                            sourceMap: true,
-                        },
-                    },
-                ]
-            },
-            {
-                test: /\.(png|jpe?g|gif)$/i,
-                loader: 'file-loader',
+                loader: "css-loader",
                 options: {
-                    name: '[name].[ext]',
-                }
+                    url: false,
+                    sourceMap: true,
+                    importLoaders: 2,
+                },
+            },
+            {
+                loader: "postcss-loader",
+                options: {
+                    sourceMap: true,
+                    postcssOptions: {
+                        plugins: ["autoprefixer"],
+                    },
+                },
+            },
+            {
+                loader: "sass-loader",
+                options: {
+                    sourceMap: true,
+                },
+            },
+            ]
+        },
+        {
+            test: /\.(png|jpe?g|gif)$/i,
+            loader: 'file-loader',
+            options: {
+                name: '[name].[ext]',
             }
+        }
         ]
     },
     plugins: [
@@ -70,11 +70,8 @@ module.exports = {
             filename: "./index.html",
         }),
         new CleanWebpackPlugin({
-            // Simulate the removal of files
             dry: true,
-            // Write Logs to Console
             verbose: true,
-            // Automatically remove all unused webpack assets on rebuild
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         })

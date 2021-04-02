@@ -14,13 +14,13 @@ export async function sentimentAnalysis(event) {
 
     if (txtEl.value) {
         const data = await fetchData('/fetchMeaningCloud', { txt: txtEl.value });
-        renderResult(data.score_tag);
+        renderResult(data);
     }
 }
 
 // Element
 const txtEl = document.querySelector('#txt');
-const cardBodyEl = document.querySelector('.card-body');
+const resultEl = document.querySelector('#results');
 
 const fetchData = async (url = '', data = {}) => {
     const response = await fetch(url, {
@@ -42,16 +42,22 @@ const fetchData = async (url = '', data = {}) => {
 
 /**
  * i render result
- * @param {string} scoreTag 
+ * @param {object} data 
  */
-function renderResult(scoreTag) {
-    const resultsEl = document.createElement('div');
-    resultsEl.innerHTML = `now your feeling is <strong>${selectFeeling(scoreTag)['value']}</strong>`;
-    cardBodyEl.append(resultsEl);
+function renderResult(data) {
+    console.log(data)
+    const addEl = document.createElement('span');
+    addEl.innerHTML = `now your feeling is<strong>${selectFeeling(data.score_tag)['value']}</strong>`;
+    resultEl.appendChild(addEl);
+    resultEl.insertAdjacentHTML('beforeend', `<span class="col">Subjectivity : ${data.subjectivity}</span>`);
+    resultEl.insertAdjacentHTML('beforeend', `<span class="col">Agreement : ${data.agreement}</span>`);
+    resultEl.insertAdjacentHTML('beforeend', `<span class="col">Irony : ${data.irony}</span>`);
+    resultEl.insertAdjacentHTML('beforeend', `<span class="col">Score_tag : ${data.score_tag}</span>`);
+    resultEl.insertAdjacentHTML('beforeend', `<span class="col">Confidence : ${data.confidence}</span>`);
 
     removeIcon();
     let img = document.createElement('img');
     img.classList.add('icon-examples');
-    img.src = selectFeeling(scoreTag)['icon'];
+    img.src = selectFeeling(data.score_tag)['icon'];
     document.getElementById('icon').appendChild(img);
 }
